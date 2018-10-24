@@ -8,7 +8,7 @@ def openLogs(inpFileName):#convert logs into database returns cursor, needed for
         res = str(data["context"]["user_id"]) +",'"+ data["context"]["course_id"] + "','" + data["time"]+"'"
         return res;
 
-    inpFileName = "spbu_BIOINF_spring_2018-TL"
+    #inpFileName = "spbu_BIOINF_spring_2018-TL"
     databaseName = inpFileName + ".sqlite"
     inpfile = open(inpFileName)
     try:
