@@ -366,7 +366,9 @@ def openLogs(inpFileName):  # convert logs into database returns cursor, needed 
 
             if extra_info != skip_str:
                 extra_info += "\n"
-                writeToDb(cursor, data["page"].split("?")[0], event_type, extra_info)
+                page = data["page"].split("?")[0]
+                page = page.split("#")[0]
+                writeToDb(cursor, page, event_type, extra_info)
 
         elif data["event_type"] in problem_events:
             event_type = data["event_type"]
@@ -436,7 +438,7 @@ def openLogs(inpFileName):  # convert logs into database returns cursor, needed 
 
             if extra_info != skip_str:
                 extra_info += "\n"
-                # only here don't change  page... WARNING!!!
+                # only here don't change  page... WARNING!!!            need to fix
                 writeToDb(cursor, problem_id, event_type, extra_info)
         # elif data["event_type"] in special_exam_events:
         #    event_type = data["event_type"]
@@ -509,7 +511,9 @@ def openLogs(inpFileName):  # convert logs into database returns cursor, needed 
 
             if extra_info != skip_str:
                 extra_info += "\n"
-                writeToDb(cursor, data["page"].split("?")[0], event_type, extra_info)
+                page = data["page"].split("?")[0]
+                page = page.split("#")[0]
+                writeToDb(cursor, page, event_type, extra_info)
 
         elif data["event_type"] in navigation_events:
             event_type = data["event_type"]
@@ -523,7 +527,9 @@ def openLogs(inpFileName):  # convert logs into database returns cursor, needed 
 
             if extra_info != skip_str:
                 extra_info += "\n"
-                writeToDb(cursor, data["page"].split("?")[0], event_type, extra_info)
+                page = data["page"].split("?")[0]
+                page = page.split("#")[0]
+                writeToDb(cursor, page, event_type, extra_info)
 
     # except sqlite3.DatabaseError as err:
     #    print("Error: ", err)
