@@ -4,3 +4,9 @@ class Video:
         self.length = length
         self.intervals_number = intervals_number
         self.review_intervals = review_intervals
+
+    def set_user_percent(self, percent):
+        self.user_percent = percent
+
+    def set_watched_percent(self, watched_percent):
+        self.watched_percent = watched_percent
