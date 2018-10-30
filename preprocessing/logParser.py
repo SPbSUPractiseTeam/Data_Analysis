@@ -438,6 +438,8 @@ def openLogs(inpFileName):  # convert logs into database returns cursor, needed 
 
             if extra_info != skip_str:
                 extra_info += "\n"
+
+                # todo: fix
                 # only here don't change  page... WARNING!!!            need to fix
                 writeToDb(cursor, problem_id, event_type, extra_info)
         # elif data["event_type"] in special_exam_events:
