@@ -1,4 +1,4 @@
-from content.video import Video
+from content.video.video import Video
 import pandas as pd
 import numpy as np
 

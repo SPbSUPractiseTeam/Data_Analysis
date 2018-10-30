@@ -1,7 +1,7 @@
 from dateutil import parser
 import pandas as pd
 
-from content.video import Video
+from content.video.video import Video
 
 
 def get_user_ids(cursor):
@@ -135,7 +135,6 @@ def get_skipped_length(cursor, video, user_id):
     return length
 
 def set_watched_percent(cursor, videos):
-    count = 0
     user_ids = get_user_ids(cursor=cursor)
 
     for video in videos:
