@@ -143,6 +143,7 @@ def openLogs(inpFileName):  # convert logs into database returns cursor, needed 
             ,questions varchar(2000)
             ,grade real
             ,max_grade real
+            ,attempts int
         )
     """)
     cursor.executescript("""
@@ -389,7 +390,7 @@ def openLogs(inpFileName):  # convert logs into database returns cursor, needed 
                     for key in event["submission"]:
                         extra_info += '"' + key + '"' + ":" + str(event["submission"][key]["correct"]) + ", "
                     extra_info = extra_info[0:-2]
-                    extra_info += "}', " + str(event["grade"]) + ", " + str(event["max_grade"])
+                    extra_info += "}', " + str(event["grade"]) + ", " + str(event["max_grade"]) + ", " + str(event["attempts"])
                     problem_id = event["problem_id"]
 
                 else:
@@ -572,7 +573,7 @@ def handleRequest(cursor, selectStr, fromStr, whereStr="", orderByStr="",
     outFile.close()
     return outFileName
 
-# cursor = openLogs("spbu_ACADRU_spring_2018-TL")
-# handleRequest(cursor, "*", "pause_video", "" ,  "user_id", "example.csv")
+cursor = openLogs("spbu_ACADRU_spring_2018-TL")
+handleRequest(cursor, "*", "pause_video", "" ,  "user_id", "example.csv")
 
 
