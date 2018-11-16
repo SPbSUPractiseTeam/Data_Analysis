@@ -1,9 +1,9 @@
 import json
 
-from content.video.video import Video
+from content.video import Video
 
 
-def output(videos, course_name):
+def output(videos, courseName):
     """
     Write results of analysis to json file.
     :param videos:
@@ -11,7 +11,9 @@ def output(videos, course_name):
     :return:
     """
 
-    with open("output/" + course_name + ".json", "w") as out:
+    fileName = courseName
+
+    with open(fileName + ".json", "w") as out:
         sections = set()
         for video in videos:
             sections.add(video.section)
@@ -49,3 +51,4 @@ def output(videos, course_name):
         course["sections"] = sections_j
 
         out.write(json.dumps(course))
+    return fileName
