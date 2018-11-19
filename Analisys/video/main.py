@@ -1,10 +1,10 @@
-from content.video import Video
-from content.video_review import set_video_length
-from content.video_review import get_videos_pages
-from content.video_review import set_video_review
-from content.video_watched_percent import set_watched_percent
+from .content.video import Video
+from .content.video_review import set_video_length
+from .content.video_review import get_videos_pages
+from .content.video_review import set_video_review
+from .content.video_watched_percent import set_watched_percent
 
-from output.output import output
+from .output import output as out
 
 def Execute(cursor, _courseName):
     
@@ -19,4 +19,4 @@ def Execute(cursor, _courseName):
     set_watched_percent(cursor, videos)
 
     # Output
-    return output(videos, _courseName)
+    return out.output(videos, _courseName)

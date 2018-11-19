@@ -1,7 +1,7 @@
 from dateutil import parser
 import pandas as pd
 
-from content.video.video import Video
+from .video import Video
 
 
 def get_user_ids(cursor):

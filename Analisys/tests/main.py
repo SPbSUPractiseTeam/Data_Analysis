@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
 
-import content.test_questions_analisys
-import content.tests_analisys
-import output.output
+from .content import test_questions_analisys as qa
+from .content import tests_analisys as ta
+from .output import output as out
 
 def Execute(cursor, courseName):
 
@@ -33,7 +33,7 @@ def Execute(cursor, courseName):
     df['problem_id']= df['problem_id'].apply(lambda x: x.split('@')[-1])
 
     #calculating: average grade, median of grade, number of answers for each test
-    avg = calculateTests(df)
+    avg = ta.calculateTests(df)
 
     #counting percent of right answers on each question
     #parsing questions string in two columns: question and result
@@ -57,9 +57,9 @@ def Execute(cursor, courseName):
     listForQuestions['question'] = listForQuestions['question'].map(str.strip) #deleting spaces
     listForQuestions['question']=listForQuestions['question'].apply(lambda x: ('"'+x.split('_')[-2] + '_' + x.split('_')[-1]))
 
-    perc = calculatePercent(listForQuestions)
+    perc = qa.calculateQuestions(listForQuestions)
 
     #merge results of analysis (average and percentade) into one table
     res=pd.merge(avg, perc, on=['course_name','problem_id','page','attempts','max_grade'], how='outer')
 
-    return output(res, courseName)
+    return out.output(res, courseName)
