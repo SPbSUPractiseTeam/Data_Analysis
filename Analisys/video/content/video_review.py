@@ -34,18 +34,22 @@ def set_video_length(cursor, videos):
     :param videos:
     :return:
     """
-    for video in videos:
+
+    index = 0
+    while index != len(videos):
         request = """
                 select max(video_time)
                 from stop_video
                 where page = "{}"
-                """.format(video.page)
+                """.format(videos[index].page)
         cursor.execute(request)
         length = cursor.fetchall()[0]
-        video.set_length(length[0])
-        if length == None:
-            # todo: make handler
-            pass
+        if length[0] is None:
+            videos.pop(index)
+            continue
+        else:
+            videos[index].set_length(length[0])
+            index += 1
 
 def set_video_review(cursor, videos):
     """
@@ -70,6 +74,8 @@ def set_video_review(cursor, videos):
         for video_old_time, video_new_time in cursor.fetchall():
             begin = int(video_new_time / step)
             end = int(video_old_time / step) + 1
+            if end == intervals_number + 1:
+                end -= 1
             for i in range(begin, end):
                 review_intervals[i] += 1
 

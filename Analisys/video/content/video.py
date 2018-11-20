@@ -7,6 +7,8 @@ class Video:
         self.page = page
         arr = page.split("/")
         # todo: exception handler
+        if arr[arr.index("courseware") - 1] != "":
+            self.course = arr[arr.index("courseware") - 1]
         if arr[arr.index("courseware") + 1] != "":
             self.section = arr[arr.index("courseware") + 1]
         if arr[arr.index("courseware") + 2] != "":

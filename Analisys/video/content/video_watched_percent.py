@@ -1,8 +1,6 @@
 from dateutil import parser
 import pandas as pd
 
-from .video import Video
-
 
 def get_user_ids(cursor):
     users = set()
