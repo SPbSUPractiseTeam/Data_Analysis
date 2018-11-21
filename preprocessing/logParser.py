@@ -379,8 +379,9 @@ def openLogs(inpFileName):  # convert logs into database returns cursor, needed 
             problem_id = ""
 
             if event_type == "edx.problem.hint.demandhint_displayed":
-                extra_info = str(event["hint_index"])
+                extra_info = "," + str(event["hint_index"])
                 problem_id = event["module_id"]
+                event_type = "problem_hint"
 
             elif event_type == "edx.problem.hint.feedback_displayed":
                 extra_info = skip_str
@@ -442,8 +443,6 @@ def openLogs(inpFileName):  # convert logs into database returns cursor, needed 
             if extra_info != skip_str:
                 extra_info += "\n"
 
-                # todo: fix
-                # only here don't change  page... WARNING!!!            need to fix
                 writeToDb(cursor, problem_id, event_type, extra_info)
         # elif data["event_type"] in special_exam_events:
         #    event_type = data["event_type"]
@@ -510,9 +509,9 @@ def openLogs(inpFileName):  # convert logs into database returns cursor, needed 
                 event_type = "book_search"
                 extra_info = ", '" + event["chapter"] + "', " + str(event["page"]) + ", '" + event["query"] + "'"
                 if event["status"] == "not found":
-                    extra_info += ", False"
+                    extra_info += ", 'false'"
                 else:
-                    extra_info += ", True"
+                    extra_info += ", 'true'"
 
             if extra_info != skip_str:
                 extra_info += "\n"
@@ -574,7 +573,7 @@ def handleRequest(cursor, selectStr, fromStr, whereStr="", orderByStr="",
     outFile.close()
     return outFileName
 
-#cursor = openLogs("spbu_ACADRU_spring_2018-TL")
+#cursor = openLogs("spbu_CHEM_spring_2018-TL")
 #handleRequest(cursor, "*", "pause_video", "" ,  "user_id", "example.csv")
 
 
