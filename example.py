@@ -1,6 +1,5 @@
 from Analisys import Analisys as an
 from preprocessing import logParser as pp
-import os.path
 
 dbname = pp.openLogs('example_logs')
 
