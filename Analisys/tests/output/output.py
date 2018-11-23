@@ -4,7 +4,7 @@ import json
 def output(res, courseName):
     fileName = courseName + '_tests_statistics.json'
     data_file = open(fileName, 'w')
-    if (res):
+    if (not res.empty):
         res['questions'] = '{"attempt":'+res['attempts'].map(str)+',"mean":'+ res['mean'].map(str)+',"median":'+res['median'].map(str)+',"number_of_solutions":'+res['number_of_solutions'].map(str)+',"max_grade":'+res['max_grade'].map(str)+',"questions":'+res['questions']+'}'
         res=res.drop(columns=['mean', 'attempts','median','number_of_solutions','max_grade'])
         res=res.groupby(['course_name','problem_id','page'])['questions'].apply(','.join).reset_index()

@@ -14,8 +14,7 @@ def Execute(cursor, courseName):
         attempts, questions,
         page, grade, max_grade
         from problem_check
-        where course_name = "course-v1:spbu+ACADRU+spring_2018"
-        and questions NOT LIKE '__'
+        where questions NOT LIKE '__'
         and attempts < 4
         """
     cursor.execute(request)
