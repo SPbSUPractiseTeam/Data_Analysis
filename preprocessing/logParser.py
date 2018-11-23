@@ -145,6 +145,7 @@ def openLogs(inpFileName):  # convert logs into database returns cursor, needed 
             ,max_grade real
             ,attempts int
             ,problem_id varchar(300)
+            ,problem_type varchar(300)
         )
     """)
     cursor.executescript("""
@@ -392,9 +393,10 @@ def openLogs(inpFileName):  # convert logs into database returns cursor, needed 
                     for key in event["submission"]:
                         extra_info += '"' + key + '"' + ":" + str(event["submission"][key]["correct"]) + ", "
                     extra_info = extra_info[0:-2]
-                    extra_info += "}', " + str(event["grade"]) + ", " + str(event["max_grade"]) + ", " + str(event["attempts"]) + ", '" + str(event["problem_id"]) + "'"
+                    extra_info += "}', " + str(event["grade"]) + ", " + str(event["max_grade"]) + ", " + str(event["attempts"]) + ", '" + str(event["problem_id"]) + "','"+ str(data["context"]["module"]["display_name"]) + "'"
                     #problem_id = event["problem_id"]
-                    problem_id = "https://courses.openedu.ru" + data["context"]["path"]
+                    #problem_id = "https://courses.openedu.ru" + data["context"]["path"]
+                    problem_id = data["referer"]
 
                 else:
                     extra_info = skip_str
@@ -573,7 +575,7 @@ def handleRequest(cursor, selectStr, fromStr, whereStr="", orderByStr="",
     outFile.close()
     return outFileName
 
-#cursor = openLogs("spbu_CHEM_spring_2018-TL")
+#cursor = openLogs("spbu_SOCLAB_spring_2018-TL")
 #handleRequest(cursor, "*", "pause_video", "" ,  "user_id", "example.csv")
 
 
