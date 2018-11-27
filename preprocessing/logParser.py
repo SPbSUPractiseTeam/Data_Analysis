@@ -541,8 +541,7 @@ def openLogs(inpFileName):  # convert logs into database returns cursor, needed 
     #    print("Error: ", err)
     # else:
     database.commit()
-    return cursor
-
+    return databaseName
 
 def handleRequest(cursor, selectStr, fromStr, whereStr="", orderByStr="",
                   outFileName="results.csv"):  # handle the request and write results into outFileName, returns outFileName
