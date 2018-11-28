@@ -4,7 +4,7 @@ import numpy as np
 def calculateQuestions(listForQuestions):
 
     #calculating: sum of grades on question and number of answers on question
-    perc=listForQuestions.groupby(['course_name','page','problem_type','problem_id','attempts','question'])['result'].agg([np.sum , np.size])
+    perc=listForQuestions.groupby(['course_name','page','problem_header','problem_id','attempts','question'])['result'].agg([np.sum , np.size])
 
     #calcilating percentage of right answers on each question
     perc=100*perc['sum']/perc['size']
@@ -15,7 +15,7 @@ def calculateQuestions(listForQuestions):
     perc=perc.drop(columns=['question', 0])
 
     #merge questions in test
-    perc=perc.groupby(['course_name','page','problem_type','problem_id','attempts'])['questions'].apply(','.join).reset_index()
+    perc=perc.groupby(['course_name','page','problem_header','problem_id','attempts'])['questions'].apply(','.join).reset_index()
     perc['questions']='[' + perc['questions'] +']'
 
     return perc

@@ -145,7 +145,7 @@ def openLogs(inpFileName):  # convert logs into database returns cursor, needed 
             ,max_grade real
             ,attempts int
             ,problem_id varchar(300)
-            ,problem_type varchar(300)
+            ,problem_header varchar(300)
         )
     """)
     cursor.executescript("""
